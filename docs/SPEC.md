@@ -160,7 +160,7 @@ Each game randomly selects 16 of the 20 characters (8 pairs).
 6. **Match celebration sequence:**
    - "Match! +1 point!" (or "Queen Duck! +1,000 BONUS!") message appears
    - After 0.8s, both ducks flip back to show their characters
-   - After 0.5s, both ducks fly up to the active player's score badge, shrinking and fading as they travel
+   - After 0.5s, both ducks fly up to the active player's score badge, shrinking as they travel (stay visible, quick fade only at the very end)
    - Score badge does a pop-bounce animation (scales up 1.5x then settles)
    - Confetti bursts from the score badge (15 pieces, or 30 for Queen Duck)
    - Score updates, same player goes again
@@ -181,7 +181,13 @@ When a player matches the Queen Duck pair, they receive **1,000 bonus points** o
 - Ducks orbit the island in a slow circle (swimAngle += 0.004 per frame)
 - Each duck has a slight vertical wobble for a floating effect
 - Water ripple effect under each duck
-- Pause/Resume button toggles animation and ambient music
+- Matched ducks leave permanent gaps in the circle (positions never redistribute)
+- Ducks never stop orbiting, even during match celebrations
+- Pause/Resume button toggles duck swimming animation and ambient music
+
+### 6.7 Testing Easter Egg
+- Double-tap the island to highlight a matching pair with a green glow pulse (3 pulses, 2.5s)
+- Glow clears automatically or when the pair is picked
 
 ---
 
@@ -189,20 +195,26 @@ When a player matches the Queen Duck pair, they receive **1,000 bonus points** o
 
 | Animation | Duration | Details |
 |-----------|----------|---------|
-| Duck fly to dock | 500ms | Ease-in-out, no scale change, smooth glide |
+| Duck fly to dock | 500ms | Ease-in-out, scales up from pond size (56px) to dock size (95px) |
 | First duck reveal | 1,000ms | Time on dock before flip |
 | Second duck reveal | 1,500ms | Longer pause for suspense |
 | Flip animation | 600ms | RotateX (-180deg), flips upward like turning duck over |
 | Match message | 800ms | Shown before ducks fly to score |
 | Match: ducks flip back | 500ms | Show characters one more time before flying to score |
-| Match: fly to score | 500ms | Ducks shrink and fade as they fly up to score badge |
+| Match: fly to score | 1,000ms | Ducks shrink from dock size to 0.5x, stay visible, quick fade at end |
 | Score pop-bounce | 600ms | Badge scales to 1.5x then settles back |
 | Confetti burst | 1,000ms | 15 pieces (30 for Queen), spread outward and fade |
 | No-match linger | 1,250ms | Ducks flip back, show characters one more time |
-| Duck fly back to pond | 500ms | Ease-in-out, reverse of fly-to-dock |
+| Duck fly back to pond | 550ms | Ease-out (decelerates on arrival), RAF homing to track orbiting target |
+| Duck landing splash | 700-800ms | Ripple rings attached to duck element, moves with orbit |
 | Screen transitions | 350ms | Opacity fade |
 
-**Easing:** All duck flight animations use `ease-in-out` for smooth acceleration and deceleration with no overshoot or bounce.
+**Easing:**
+- Fly to dock: `ease-in-out`
+- Fly back to pond: `ease-out` with RAF homing loop (tracks orbiting duck's live position)
+- Fly to score: `ease-in-out`, 1s duration, no fade until final 150ms
+
+**Orbit behavior:** Matched ducks leave permanent gaps in the circle. Positions are never redistributed during a game, keeping the layout stable and predictable.
 
 ---
 

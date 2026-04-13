@@ -131,8 +131,9 @@
   }
 
   function positionDucks() {
-    var activeDucks = DuckyEngine.remainingDucks(state);
-    var total = activeDucks.length;
+    // Always use ALL ducks for layout so gaps remain where matched ducks were
+    var allDucks = state.ducks;
+    var total = allDucks.length;
     if (total === 0) return;
 
     var pondRect = pond.getBoundingClientRect();
@@ -144,18 +145,17 @@
     duckElements.forEach(function (el) {
       var id = parseInt(el.getAttribute('data-id'), 10);
       var duck = DuckyEngine.getDuck(state, id);
-      if (!duck || duck.matched) {
-        el.style.display = 'none';
-        return;
-      }
-      el.style.display = '';
+      if (!duck) { el.style.display = 'none'; return; }
 
-      // Find this duck's index among active ducks
+      // Hide matched ducks but keep their slot
+      el.style.display = duck.matched ? 'none' : '';
+
+      // Every duck keeps its original position in the circle
       var idx = -1;
-      for (var i = 0; i < activeDucks.length; i++) {
-        if (activeDucks[i].id === id) { idx = i; break; }
+      for (var i = 0; i < allDucks.length; i++) {
+        if (allDucks[i].id === id) { idx = i; break; }
       }
-      if (idx === -1) { el.style.display = 'none'; return; }
+      if (idx === -1) return;
 
       var angle = (2 * Math.PI * idx / total) + swimAngle;
       var x = cx + radius * Math.cos(angle) - duckSize / 2;
@@ -228,6 +228,40 @@
 
     positionDucks();
   }
+
+  // --- Test cheat: double-tap island to highlight a matching pair ---
+  document.querySelector('.pond-island').addEventListener('dblclick', function () {
+    if (!state || state.phase !== 'picking' || animating) return;
+
+    // Clear previous hints
+    duckElements.forEach(function (el) { el.classList.remove('hint-glow'); });
+
+    // Find an unmatched, unpicked pair
+    var remaining = DuckyEngine.remainingDucks(state);
+    var pair = null;
+    for (var i = 0; i < remaining.length && !pair; i++) {
+      for (var j = i + 1; j < remaining.length; j++) {
+        if (remaining[i].matchValue === remaining[j].matchValue) {
+          pair = [remaining[i].id, remaining[j].id];
+          break;
+        }
+      }
+    }
+    if (!pair) return;
+
+    // Glow the matching pair
+    duckElements.forEach(function (el) {
+      var id = parseInt(el.getAttribute('data-id'), 10);
+      if (id === pair[0] || id === pair[1]) {
+        el.classList.add('hint-glow');
+      }
+    });
+
+    // Remove glow after 3 pulses
+    setTimeout(function () {
+      duckElements.forEach(function (el) { el.classList.remove('hint-glow'); });
+    }, 2500);
+  });
 
   // --- Update HUD ---
   function updateHUD() {
@@ -457,18 +491,23 @@
     flyer.style.transform = 'scale(1.7)';
     document.body.appendChild(flyer);
 
-    // Fly up to score badge, shrinking along the way
+    // Fly up to score badge, shrinking along the way, stay visible
     requestAnimationFrame(function () {
       flyer.style.left = (targetRect.left + targetRect.width / 2 - 28) + 'px';
       flyer.style.top = (targetRect.top + targetRect.height / 2 - 28) + 'px';
-      flyer.style.transform = 'scale(0.4)';
-      flyer.style.opacity = '0';
+      flyer.style.transform = 'scale(0.5)';
     });
+
+    // Quick fade at the very end
+    setTimeout(function () {
+      flyer.style.transition = 'opacity 0.15s ease-out';
+      flyer.style.opacity = '0';
+    }, 850);
 
     setTimeout(function () {
       flyer.remove();
       if (callback) callback();
-    }, 900);
+    }, 1050);
   }
 
   function handleMatch(result) {
@@ -501,7 +540,6 @@
               // Update state and score
               state = DuckyEngine.resolveTurn(state);
               updateHUD();
-              positionDucks();
 
               // Bounce the score badge
               var activeBadge = scoreDisplay.querySelector('.score-badge.active-player') || scoreDisplay.querySelector('.score-badge');
@@ -518,7 +556,10 @@
               flipResult.textContent = '';
               pickedPondEl1 = null;
               pickedPondEl2 = null;
-              animating = false;
+
+              setTimeout(function () {
+                animating = false;
+              }, 600);
 
               if (result.event === 'game-over') {
                 setTimeout(function () {
@@ -592,20 +633,15 @@
       if (t < 1) {
         requestAnimationFrame(animateReturn);
       } else {
-        // Get flyer's exact final position before removing it
-        var finalRect = flyer.getBoundingClientRect();
-        var pondRect = pond.getBoundingClientRect();
         flyer.remove();
         pondEl.style.opacity = '';
         pondEl.classList.remove('selected');
 
-        // Splash exactly where the duck landed
-        var splash = document.createElement('div');
-        splash.className = 'pond-splash';
-        splash.style.left = (finalRect.left - pondRect.left + finalRect.width / 2 - 25) + 'px';
-        splash.style.top = (finalRect.top - pondRect.top + finalRect.height / 2 - 25) + 'px';
-        pond.appendChild(splash);
-        setTimeout(function () { splash.remove(); }, 900);
+        // Splash is part of the duck element itself, so zero lag
+        pondEl.classList.add('splashing');
+        setTimeout(function () {
+          pondEl.classList.remove('splashing');
+        }, 800);
 
         if (callback) callback();
       }
