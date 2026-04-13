@@ -459,6 +459,9 @@ html, body {
   pointer-events: none;
   transition: left 0.5s ease-in-out, top 0.5s ease-in-out, transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
+.duck-flying-return {
+  transition: left 0.55s ease-out, top 0.55s ease-out, transform 0.55s ease-out;
+}
 .duck-flying-to-score {
   transition: left 0.8s ease-in, top 0.8s ease-in, transform 0.8s ease-in, opacity 0.8s ease-in;
 }
@@ -495,6 +498,29 @@ html, body {
 /* ============================================================
    Utility
    ============================================================ */
+/* --- Pond splash effect --- */
+.pond-splash {
+  position: absolute;
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.5);
+  z-index: 7;
+  pointer-events: none;
+  animation: splash-ring 0.5s ease-out forwards;
+}
+.pond-splash::after {
+  content: '';
+  position: absolute; inset: -6px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.25);
+  animation: splash-ring 0.5s ease-out 0.1s forwards;
+  opacity: 0;
+}
+@keyframes splash-ring {
+  0% { transform: scale(0.3); opacity: 0.8; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
 .version-tag {
   position: absolute; bottom: 8px; right: 12px;
   font-size: 0.65rem; color: rgba(0,0,0,0.15);

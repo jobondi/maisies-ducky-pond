@@ -541,10 +541,9 @@
     var slotRect = slot.getBoundingClientRect();
     var pondRect = pondEl.getBoundingClientRect();
 
-    // Get the duck image src from the dock duck
     var frontImg = slot.querySelector('.dock-duck-front img');
     var flyer = document.createElement('div');
-    flyer.className = 'duck-flying';
+    flyer.className = 'duck-flying duck-flying-return';
     if (frontImg) {
       var flyImg = document.createElement('img');
       flyImg.src = frontImg.src;
@@ -552,24 +551,42 @@
       flyer.appendChild(flyImg);
     }
 
-    // Clear the slot
     slot.innerHTML = '';
 
-    flyer.style.left = (slotRect.left + slotRect.width / 2 - 24) + 'px';
-    flyer.style.top = (slotRect.top + slotRect.height / 2 - 24) + 'px';
+    // Start at dock position, scaled up (dock size)
+    flyer.style.left = (slotRect.left + slotRect.width / 2 - 28) + 'px';
+    flyer.style.top = (slotRect.top + slotRect.height / 2 - 28) + 'px';
+    flyer.style.transform = 'scale(1.7)';
     document.body.appendChild(flyer);
 
+    // Fly back to pond position, scale down to pond size
     requestAnimationFrame(function () {
-      flyer.style.left = pondRect.left + 'px';
-      flyer.style.top = pondRect.top + 'px';
+      flyer.style.left = (pondRect.left + pondRect.width / 2 - 28) + 'px';
+      flyer.style.top = (pondRect.top + pondRect.height / 2 - 28) + 'px';
+      flyer.style.transform = 'scale(1)';
     });
 
     setTimeout(function () {
       flyer.remove();
       pondEl.style.opacity = '';
       pondEl.classList.remove('selected');
+
+      // Splash effect
+      var splash = document.createElement('div');
+      splash.className = 'pond-splash';
+      splash.style.left = (pondRect.width / 2 - 20) + 'px';
+      splash.style.top = (pondRect.height / 2 - 20) + 'px';
+      // Position relative to pond element's position within its parent
+      var pondParentRect = pond.getBoundingClientRect();
+      var relX = pondRect.left - pondParentRect.left + pondRect.width / 2;
+      var relY = pondRect.top - pondParentRect.top + pondRect.height / 2;
+      splash.style.left = (relX - 20) + 'px';
+      splash.style.top = (relY - 20) + 'px';
+      pond.appendChild(splash);
+      setTimeout(function () { splash.remove(); }, 600);
+
       if (callback) callback();
-    }, 550);
+    }, 600);
   }
 
   function handleNoMatch(result) {
