@@ -43,6 +43,22 @@
     navigateTo('setup');
   });
 
+  // --- Share button ---
+  document.getElementById('btn-share').addEventListener('click', function () {
+    var url = window.location.href;
+    if (navigator.share) {
+      navigator.share({ title: "Maisie's Ducky Pond", text: 'Play this fun duck memory game!', url: url });
+    } else if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(function () {
+        var btn = document.getElementById('btn-share');
+        btn.querySelector('span').textContent = 'Link Copied!';
+        setTimeout(function () {
+          btn.querySelector('span').textContent = '\uD83D\uDD17 Share with Friends';
+        }, 2000);
+      });
+    }
+  });
+
   // --- Setup screen ---
   btnBackSetup.addEventListener('click', function () {
     navigateTo('title');
