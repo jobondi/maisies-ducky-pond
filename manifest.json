@@ -1,0 +1,22 @@
+{
+  "name": "Maisie's Ducky Pond",
+  "short_name": "Ducky Pond",
+  "description": "A fun rubber duck memory matching game!",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#FFF8E1",
+  "theme_color": "#FFD54F",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

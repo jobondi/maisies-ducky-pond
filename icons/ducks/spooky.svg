@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <ellipse cx="50" cy="68" rx="30" ry="22" fill="#FFD54F"/>
+  <circle cx="50" cy="38" r="20" fill="#FFD54F"/>
+  <ellipse cx="50" cy="45" rx="8" ry="4" fill="#FF8F00"/>
+  <circle cx="43" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="57" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="44" cy="33" r="1" fill="#fff"/>
+  <circle cx="58" cy="33" r="1" fill="#fff"/>
+  <circle cx="38" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <circle cx="62" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <ellipse cx="28" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(-15 28 65)"/>
+  <ellipse cx="72" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(15 72 65)"/>
+  <!-- Witch hat -->
+  <ellipse cx="50" cy="25" rx="24" ry="5" fill="#212121"/>
+  <polygon points="50,0 34,25 66,25" fill="#4A148C"/>
+  <!-- Hat buckle -->
+  <rect x="43" y="20" width="14" height="5" rx="1" fill="#FFD54F"/>
+  <rect x="46" y="21" width="8" height="3" rx="1" fill="#4A148C"/>
+  <!-- Bat -->
+  <g transform="translate(78,20) scale(0.4)">
+    <ellipse cx="0" cy="0" rx="5" ry="4" fill="#212121"/>
+    <path d="M-5,-2 Q-15,-10 -20,0 Q-12,-3 -5,0" fill="#212121"/>
+    <path d="M5,-2 Q15,-10 20,0 Q12,-3 5,0" fill="#212121"/>
+    <circle cx="-2" cy="-1" r="1" fill="#E53935"/>
+    <circle cx="2" cy="-1" r="1" fill="#E53935"/>
+  </g>
+  <!-- Spider web strand -->
+  <path d="M20,15 Q25,20 22,30" fill="none" stroke="#9E9E9E" stroke-width="0.5" opacity="0.6"/>
+</svg>

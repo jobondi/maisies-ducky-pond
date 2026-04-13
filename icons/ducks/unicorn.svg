@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <ellipse cx="50" cy="68" rx="30" ry="22" fill="#FFD54F"/>
+  <circle cx="50" cy="38" r="20" fill="#FFD54F"/>
+  <ellipse cx="50" cy="45" rx="8" ry="4" fill="#FF8F00"/>
+  <circle cx="43" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="57" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="44" cy="33" r="1" fill="#fff"/>
+  <circle cx="58" cy="33" r="1" fill="#fff"/>
+  <circle cx="38" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <circle cx="62" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <ellipse cx="28" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(-15 28 65)"/>
+  <ellipse cx="72" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(15 72 65)"/>
+  <!-- Unicorn horn -->
+  <polygon points="50,4 45,22 55,22" fill="url(#hornGrad)"/>
+  <!-- Horn spiral lines -->
+  <line x1="47" y1="18" x2="53" y2="16" stroke="#FFD54F" stroke-width="1" opacity="0.6"/>
+  <line x1="48" y1="14" x2="52" y2="12" stroke="#FFD54F" stroke-width="1" opacity="0.6"/>
+  <line x1="49" y1="10" x2="51" y2="8" stroke="#FFD54F" stroke-width="1" opacity="0.6"/>
+  <!-- Rainbow mane -->
+  <path d="M32,28 Q28,22 30,16" fill="none" stroke="#E53935" stroke-width="3" stroke-linecap="round"/>
+  <path d="M30,30 Q25,24 27,18" fill="none" stroke="#FF9800" stroke-width="3" stroke-linecap="round"/>
+  <path d="M28,33 Q22,28 24,22" fill="none" stroke="#FFEB3B" stroke-width="3" stroke-linecap="round"/>
+  <path d="M27,36 Q20,32 22,26" fill="none" stroke="#4CAF50" stroke-width="3" stroke-linecap="round"/>
+  <path d="M27,40 Q19,37 20,30" fill="none" stroke="#2196F3" stroke-width="3" stroke-linecap="round"/>
+  <path d="M28,44 Q20,42 20,35" fill="none" stroke="#9C27B0" stroke-width="3" stroke-linecap="round"/>
+  <!-- Sparkles -->
+  <circle cx="62" cy="14" r="1.5" fill="#CE93D8"/>
+  <circle cx="72" cy="22" r="1" fill="#F48FB1"/>
+  <circle cx="38" cy="10" r="1" fill="#80DEEA"/>
+  <defs>
+    <linearGradient id="hornGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#CE93D8"/>
+      <stop offset="50%" stop-color="#F48FB1"/>
+      <stop offset="100%" stop-color="#FFD54F"/>
+    </linearGradient>
+  </defs>
+</svg>

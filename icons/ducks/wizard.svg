@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <ellipse cx="50" cy="68" rx="30" ry="22" fill="#FFD54F"/>
+  <circle cx="50" cy="38" r="20" fill="#FFD54F"/>
+  <ellipse cx="50" cy="45" rx="8" ry="4" fill="#FF8F00"/>
+  <circle cx="43" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="57" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="44" cy="33" r="1" fill="#fff"/>
+  <circle cx="58" cy="33" r="1" fill="#fff"/>
+  <circle cx="38" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <circle cx="62" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <ellipse cx="28" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(-15 28 65)"/>
+  <ellipse cx="72" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(15 72 65)"/>
+  <!-- Wizard hat -->
+  <polygon points="50,0 30,28 70,28" fill="#5C6BC0"/>
+  <ellipse cx="50" cy="28" rx="22" ry="5" fill="#5C6BC0"/>
+  <!-- Stars on hat -->
+  <polygon points="45,12 46,15 49,15 47,17 48,20 45,18 42,20 43,17 41,15 44,15" fill="#FFD54F" transform="scale(0.7) translate(18,4)"/>
+  <polygon points="55,8 56,11 59,11 57,13 58,16 55,14 52,16 53,13 51,11 54,11" fill="#FFD54F" transform="scale(0.6) translate(32,3)"/>
+  <!-- Beard -->
+  <path d="M38,48 Q40,58 50,62 Q60,58 62,48" fill="none" stroke="#E0E0E0" stroke-width="3" stroke-linecap="round"/>
+  <path d="M40,50 Q42,60 50,65 Q58,60 60,50" fill="none" stroke="#BDBDBD" stroke-width="2" stroke-linecap="round"/>
+</svg>

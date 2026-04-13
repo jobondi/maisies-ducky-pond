@@ -1,0 +1,26 @@
+{
+  "name": "maisies-ducky-pond",
+  "version": "1.0.0",
+  "description": "Maisie's Ducky Pond — a rubber duck memory matching game PWA",
+  "main": "sw.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "npx serve -l 3001"
+  },
+  "keywords": [
+    "education",
+    "kids",
+    "pwa",
+    "memory",
+    "ducks",
+    "matching"
+  ],
+  "author": "jobondi",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^30.3.0"
+  }
+}

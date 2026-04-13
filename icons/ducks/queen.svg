@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Body -->
+  <ellipse cx="50" cy="68" rx="30" ry="22" fill="#FFD54F"/>
+  <ellipse cx="50" cy="68" rx="30" ry="22" fill="url(#bodyShade)" opacity="0.3"/>
+  <!-- Head -->
+  <circle cx="50" cy="38" r="20" fill="#FFD54F"/>
+  <circle cx="50" cy="38" r="20" fill="url(#headShade)" opacity="0.2"/>
+  <!-- Beak -->
+  <ellipse cx="50" cy="45" rx="8" ry="4" fill="#FF8F00"/>
+  <!-- Eyes -->
+  <circle cx="43" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="57" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="44" cy="33" r="1" fill="#fff"/>
+  <circle cx="58" cy="33" r="1" fill="#fff"/>
+  <!-- Cheeks -->
+  <circle cx="38" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <circle cx="62" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <!-- Wing -->
+  <ellipse cx="28" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(-15 28 65)"/>
+  <ellipse cx="72" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(15 72 65)"/>
+  <!-- Crown -->
+  <polygon points="35,24 38,12 42,20 46,8 50,20 54,8 58,20 62,12 65,24" fill="#FFD700" stroke="#FFA000" stroke-width="1"/>
+  <circle cx="42" cy="17" r="2" fill="#E53935"/>
+  <circle cx="50" cy="13" r="2" fill="#1E88E5"/>
+  <circle cx="58" cy="17" r="2" fill="#43A047"/>
+  <!-- Gradients -->
+  <defs>
+    <radialGradient id="bodyShade"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#F9A825"/></radialGradient>
+    <radialGradient id="headShade"><stop offset="0%" stop-color="#fff"/><stop offset="100%" stop-color="#F9A825"/></radialGradient>
+  </defs>
+</svg>

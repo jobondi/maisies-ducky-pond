@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <ellipse cx="50" cy="68" rx="30" ry="22" fill="#FFD54F"/>
+  <circle cx="50" cy="38" r="20" fill="#FFD54F"/>
+  <ellipse cx="50" cy="45" rx="8" ry="4" fill="#FF8F00"/>
+  <circle cx="43" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="57" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="44" cy="33" r="1" fill="#fff"/>
+  <circle cx="58" cy="33" r="1" fill="#fff"/>
+  <circle cx="38" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <circle cx="62" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <ellipse cx="28" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(-15 28 65)"/>
+  <ellipse cx="72" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(15 72 65)"/>
+  <!-- Mask -->
+  <path d="M33,30 Q38,26 43,30 L43,36 Q38,38 33,36 Z" fill="#1E88E5"/>
+  <path d="M57,30 Q62,26 67,30 L67,36 Q62,38 57,36 Z" fill="#1E88E5"/>
+  <!-- Cape -->
+  <path d="M30,55 Q20,70 18,90 L35,80 Q32,65 35,55 Z" fill="#E53935"/>
+  <path d="M70,55 Q80,70 82,90 L65,80 Q68,65 65,55 Z" fill="#E53935"/>
+  <!-- Chest emblem -->
+  <polygon points="50,58 53,64 59,65 55,69 56,75 50,72 44,75 45,69 41,65 47,64" fill="#E53935"/>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <ellipse cx="50" cy="68" rx="30" ry="22" fill="#FFD54F"/>
+  <circle cx="50" cy="38" r="20" fill="#FFD54F"/>
+  <ellipse cx="50" cy="45" rx="8" ry="4" fill="#FF8F00"/>
+  <circle cx="43" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="57" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="44" cy="33" r="1" fill="#fff"/>
+  <circle cx="58" cy="33" r="1" fill="#fff"/>
+  <circle cx="38" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <circle cx="62" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <ellipse cx="28" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(-15 28 65)"/>
+  <ellipse cx="72" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(15 72 65)"/>
+  <!-- Flowing hair -->
+  <path d="M30,35 Q22,25 28,15 Q32,22 30,35" fill="#CE93D8"/>
+  <path d="M34,30 Q28,18 35,10 Q36,20 34,30" fill="#AB47BC"/>
+  <path d="M70,35 Q78,25 72,15 Q68,22 70,35" fill="#CE93D8"/>
+  <path d="M66,30 Q72,18 65,10 Q64,20 66,30" fill="#AB47BC"/>
+  <!-- Eyelashes -->
+  <line x1="40" y1="31" x2="38" y2="29" stroke="#3E2723" stroke-width="1" stroke-linecap="round"/>
+  <line x1="60" y1="31" x2="62" y2="29" stroke="#3E2723" stroke-width="1" stroke-linecap="round"/>
+  <!-- Shell crown -->
+  <path d="M40,22 Q42,16 46,18 Q48,14 50,18 Q52,14 54,18 Q58,16 60,22" fill="#F48FB1"/>
+  <!-- Mermaid tail (bottom) -->
+  <path d="M40,88 Q50,82 60,88" fill="none" stroke="#26C6DA" stroke-width="3"/>
+  <ellipse cx="38" cy="90" rx="6" ry="4" fill="#26C6DA" transform="rotate(-20 38 90)"/>
+  <ellipse cx="62" cy="90" rx="6" ry="4" fill="#26C6DA" transform="rotate(20 62 90)"/>
+  <!-- Scale pattern on body -->
+  <path d="M38,65 Q42,62 46,65" fill="none" stroke="#26C6DA" stroke-width="1" opacity="0.5"/>
+  <path d="M46,65 Q50,62 54,65" fill="none" stroke="#26C6DA" stroke-width="1" opacity="0.5"/>
+  <path d="M54,65 Q58,62 62,65" fill="none" stroke="#26C6DA" stroke-width="1" opacity="0.5"/>
+  <path d="M42,70 Q46,67 50,70" fill="none" stroke="#26C6DA" stroke-width="1" opacity="0.5"/>
+  <path d="M50,70 Q54,67 58,70" fill="none" stroke="#26C6DA" stroke-width="1" opacity="0.5"/>
+</svg>

@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <ellipse cx="50" cy="68" rx="30" ry="22" fill="#FFD54F"/>
+  <circle cx="50" cy="38" r="20" fill="#FFD54F"/>
+  <ellipse cx="50" cy="45" rx="8" ry="4" fill="#FF8F00"/>
+  <circle cx="43" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="57" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="44" cy="33" r="1" fill="#fff"/>
+  <circle cx="58" cy="33" r="1" fill="#fff"/>
+  <circle cx="38" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <circle cx="62" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <ellipse cx="28" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(-15 28 65)"/>
+  <ellipse cx="72" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(15 72 65)"/>
+  <!-- Fire helmet -->
+  <ellipse cx="50" cy="26" rx="22" ry="5" fill="#E53935"/>
+  <path d="M32,26 Q32,14 50,12 Q68,14 68,26" fill="#E53935"/>
+  <!-- Helmet brim extends forward -->
+  <ellipse cx="50" cy="27" rx="24" ry="6" fill="#C62828"/>
+  <!-- Helmet badge -->
+  <rect x="45" y="16" width="10" height="8" rx="1" fill="#FFD54F"/>
+  <text x="50" y="23" font-size="6" fill="#C62828" text-anchor="middle" font-weight="bold" font-family="sans-serif">FD</text>
+</svg>

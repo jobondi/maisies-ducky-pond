@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <ellipse cx="50" cy="68" rx="30" ry="22" fill="#FFD54F"/>
+  <circle cx="50" cy="38" r="20" fill="#FFD54F"/>
+  <ellipse cx="50" cy="45" rx="8" ry="4" fill="#FF8F00"/>
+  <circle cx="43" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="57" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="44" cy="33" r="1" fill="#fff"/>
+  <circle cx="58" cy="33" r="1" fill="#fff"/>
+  <ellipse cx="28" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(-15 28 65)"/>
+  <ellipse cx="72" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(15 72 65)"/>
+  <!-- Dragon spines -->
+  <polygon points="38,20 40,8 44,20" fill="#43A047"/>
+  <polygon points="46,18 50,4 54,18" fill="#66BB6A"/>
+  <polygon points="56,20 60,8 62,20" fill="#43A047"/>
+  <!-- Dragon wings -->
+  <path d="M20,50 Q8,35 12,20 L18,30 L22,22 L24,35 Q22,42 20,50 Z" fill="#66BB6A" opacity="0.8"/>
+  <path d="M80,50 Q92,35 88,20 L82,30 L78,22 L76,35 Q78,42 80,50 Z" fill="#66BB6A" opacity="0.8"/>
+  <!-- Nostrils with smoke -->
+  <circle cx="46" cy="44" r="1.5" fill="#3E2723"/>
+  <circle cx="54" cy="44" r="1.5" fill="#3E2723"/>
+  <!-- Fire breath -->
+  <path d="M62,42 Q70,38 75,42 Q72,36 78,34 Q74,30 76,26" fill="none" stroke="#FF9800" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+  <path d="M64,44 Q70,42 74,38" fill="none" stroke="#E53935" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+  <!-- Tail -->
+  <path d="M80,68 Q88,62 86,52 Q84,56 90,50" fill="none" stroke="#43A047" stroke-width="3" stroke-linecap="round"/>
+  <polygon points="90,48 94,52 86,52" fill="#43A047"/>
+</svg>

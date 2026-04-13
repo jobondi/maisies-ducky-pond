@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <ellipse cx="50" cy="68" rx="30" ry="22" fill="#FFD54F"/>
+  <circle cx="50" cy="38" r="20" fill="#FFD54F"/>
+  <ellipse cx="50" cy="45" rx="8" ry="4" fill="#FF8F00"/>
+  <circle cx="38" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <circle cx="62" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <ellipse cx="28" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(-15 28 65)"/>
+  <ellipse cx="72" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(15 72 65)"/>
+  <!-- Frog hood -->
+  <path d="M30,40 Q30,18 50,16 Q70,18 70,40 Q60,42 50,40 Q40,42 30,40 Z" fill="#66BB6A"/>
+  <!-- Big frog eyes on top -->
+  <circle cx="38" cy="18" r="9" fill="#66BB6A"/>
+  <circle cx="62" cy="18" r="9" fill="#66BB6A"/>
+  <circle cx="38" cy="16" r="6" fill="#fff"/>
+  <circle cx="62" cy="16" r="6" fill="#fff"/>
+  <circle cx="39" cy="15" r="3.5" fill="#3E2723"/>
+  <circle cx="63" cy="15" r="3.5" fill="#3E2723"/>
+  <circle cx="40" cy="14" r="1.2" fill="#fff"/>
+  <circle cx="64" cy="14" r="1.2" fill="#fff"/>
+  <!-- Duck's own eyes peeking under hood -->
+  <circle cx="43" cy="34" r="2.5" fill="#3E2723"/>
+  <circle cx="57" cy="34" r="2.5" fill="#3E2723"/>
+  <circle cx="44" cy="33" r="1" fill="#fff"/>
+  <circle cx="58" cy="33" r="1" fill="#fff"/>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <ellipse cx="50" cy="68" rx="30" ry="22" fill="#FFD54F"/>
+  <circle cx="50" cy="38" r="20" fill="#FFD54F"/>
+  <ellipse cx="50" cy="45" rx="8" ry="4" fill="#FF8F00"/>
+  <circle cx="43" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="57" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="44" cy="33" r="1" fill="#fff"/>
+  <circle cx="58" cy="33" r="1" fill="#fff"/>
+  <circle cx="38" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <circle cx="62" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <ellipse cx="28" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(-15 28 65)"/>
+  <ellipse cx="72" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(15 72 65)"/>
+  <!-- Sunglasses -->
+  <rect x="37" y="31" width="10" height="7" rx="3" fill="#1E88E5" opacity="0.7"/>
+  <rect x="53" y="31" width="10" height="7" rx="3" fill="#1E88E5" opacity="0.7"/>
+  <line x1="47" y1="34" x2="53" y2="34" stroke="#1E88E5" stroke-width="1.5"/>
+  <!-- Flower lei necklace -->
+  <circle cx="35" cy="55" r="3" fill="#F48FB1"/>
+  <circle cx="42" cy="52" r="3" fill="#FFAB91"/>
+  <circle cx="50" cy="51" r="3" fill="#F48FB1"/>
+  <circle cx="58" cy="52" r="3" fill="#FFAB91"/>
+  <circle cx="65" cy="55" r="3" fill="#F48FB1"/>
+  <!-- Surfboard behind -->
+  <rect x="82" y="30" width="6" height="55" rx="3" fill="#4FC3F7" transform="rotate(15 85 55)"/>
+  <rect x="83" y="35" width="4" height="15" rx="2" fill="#FF7043" transform="rotate(15 85 42)"/>
+</svg>

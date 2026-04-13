@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <ellipse cx="50" cy="68" rx="30" ry="22" fill="#FFD54F"/>
+  <circle cx="50" cy="38" r="20" fill="#FFD54F"/>
+  <ellipse cx="50" cy="45" rx="8" ry="4" fill="#FF8F00"/>
+  <circle cx="43" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="57" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="44" cy="33" r="1" fill="#fff"/>
+  <circle cx="58" cy="33" r="1" fill="#fff"/>
+  <circle cx="38" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <circle cx="62" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <ellipse cx="28" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(-15 28 65)"/>
+  <ellipse cx="72" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(15 72 65)"/>
+  <!-- Head mirror -->
+  <circle cx="50" cy="20" r="7" fill="#E0E0E0" stroke="#BDBDBD" stroke-width="1"/>
+  <circle cx="50" cy="20" r="4" fill="#B3E5FC"/>
+  <circle cx="48" cy="18" r="1.5" fill="#fff" opacity="0.6"/>
+  <!-- Head band -->
+  <path d="M35,23 Q50,18 65,23" fill="none" stroke="#9E9E9E" stroke-width="2"/>
+  <!-- Stethoscope -->
+  <path d="M38,55 Q35,65 38,75 Q42,82 50,82 Q58,82 62,75 Q65,65 62,55" fill="none" stroke="#424242" stroke-width="2.5"/>
+  <circle cx="50" cy="84" r="4" fill="#9E9E9E"/>
+  <circle cx="50" cy="84" r="2" fill="#616161"/>
+  <!-- White coat collar -->
+  <path d="M35,55 L42,62 L50,56 L58,62 L65,55" fill="#fff" stroke="#E0E0E0" stroke-width="0.5"/>
+</svg>

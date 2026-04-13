@@ -1,0 +1,469 @@
+/* ============================================================
+   Maisie's Ducky Pond — Global Styles
+   Yellow rubber ducky theme with green action buttons
+   ============================================================ */
+
+/* --- Reset & Base --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  font-family: 'Nunito', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  background: #FFF8E1;
+}
+
+/* --- Screen System --- */
+.screen {
+  position: fixed; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+  overflow: hidden;
+}
+.screen.active { opacity: 1; visibility: visible; }
+.screen-inner {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 18px; padding: 24px; width: 100%; max-width: 420px;
+}
+
+/* --- Buttons --- */
+.btn-ducky {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700; font-size: 1.15rem;
+  border: none; border-radius: 50px;
+  padding: 14px 36px;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-ducky:active { transform: scale(0.95); }
+.btn-primary {
+  background: linear-gradient(135deg, #66BB6A, #43A047);
+  color: #fff; box-shadow: 0 4px 12px rgba(67, 160, 71, 0.4);
+}
+.btn-primary:disabled {
+  background: #ccc; color: #999; box-shadow: none; cursor: default;
+}
+.btn-primary:not(:disabled):hover {
+  box-shadow: 0 6px 18px rgba(67, 160, 71, 0.5);
+}
+.btn-secondary {
+  background: #fff; color: #F9A825;
+  border: 2px solid #F9A825;
+}
+.btn-back {
+  position: absolute; top: 16px; left: 16px;
+  background: rgba(255,255,255,0.7); border: none; border-radius: 50%;
+  width: 40px; height: 40px; font-size: 1.3rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 10;
+  transition: background 0.2s;
+}
+.btn-back:hover { background: rgba(255,255,255,0.95); }
+
+/* --- Inputs --- */
+.input-ducky {
+  font-family: 'Nunito', sans-serif;
+  font-size: 1.1rem; font-weight: 700;
+  padding: 12px 18px; border-radius: 16px;
+  border: 2px solid #FFD54F; background: #fff;
+  outline: none; width: 100%; text-align: center;
+  transition: border-color 0.2s;
+}
+.input-ducky:focus { border-color: #F9A825; }
+
+/* ============================================================
+   Title Screen
+   ============================================================ */
+#screen-title {
+  background: linear-gradient(180deg, #FFF9C4 0%, #FFEE58 30%, #FFD54F 60%, #F9A825 100%);
+}
+.title-content {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 12px; z-index: 2; position: relative;
+}
+.title-mascot {
+  font-size: 5rem;
+  animation: ducky-bob 2s ease-in-out infinite;
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.15));
+}
+@keyframes ducky-bob {
+  0%, 100% { transform: translateY(0) rotate(-5deg); }
+  50% { transform: translateY(-12px) rotate(5deg); }
+}
+.title-text { text-align: center; color: #5D4037; text-shadow: 0 2px 6px rgba(255,255,255,0.5); }
+.title-line1 { display: block; font-size: 2.2rem; font-weight: 900; }
+.title-line2 { display: block; font-size: 2.8rem; font-weight: 900; }
+.title-sparkles { font-size: 1.5rem; letter-spacing: 8px; }
+
+/* Bubbles */
+.title-bubbles { position: absolute; top: -60px; width: 300px; height: 120px; }
+.bubble {
+  position: absolute; border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+  animation: bubble-rise 4s ease-in infinite;
+}
+.b1 { width: 16px; height: 16px; left: 20%; animation-delay: 0s; }
+.b2 { width: 10px; height: 10px; left: 50%; animation-delay: 1s; }
+.b3 { width: 14px; height: 14px; left: 75%; animation-delay: 2s; }
+.b4 { width: 8px;  height: 8px;  left: 35%; animation-delay: 0.5s; }
+.b5 { width: 12px; height: 12px; left: 60%; animation-delay: 1.5s; }
+@keyframes bubble-rise {
+  0% { transform: translateY(0) scale(1); opacity: 0.7; }
+  100% { transform: translateY(-80px) scale(0.5); opacity: 0; }
+}
+
+/* Waves */
+.title-waves {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 100px;
+  overflow: hidden; z-index: 1;
+}
+.wave {
+  position: absolute; bottom: -10px; left: -5%; width: 110%; height: 60px;
+  border-radius: 50% 50% 0 0;
+}
+.wave-1 {
+  background: rgba(255,255,255,0.25);
+  animation: wave-sway 4s ease-in-out infinite;
+}
+.wave-2 {
+  background: rgba(255,255,255,0.15);
+  animation: wave-sway 5s ease-in-out infinite reverse;
+  bottom: -15px;
+}
+@keyframes wave-sway {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(20px); }
+}
+
+/* ============================================================
+   Setup Screen
+   ============================================================ */
+#screen-setup {
+  background: linear-gradient(180deg, #FFFDE7 0%, #FFF9C4 50%, #FFF176 100%);
+}
+.setup-mascot { font-size: 3.5rem; }
+#screen-setup h2 {
+  font-size: 1.6rem; color: #E65100; font-weight: 900;
+}
+.player-count-buttons {
+  display: flex; gap: 12px;
+}
+.btn-count {
+  width: 56px; height: 56px; padding: 0;
+  border-radius: 50%; font-size: 1.4rem; font-weight: 900;
+  background: #fff; color: #F9A825;
+  border: 3px solid #FFD54F;
+  transition: all 0.2s;
+}
+.btn-count.active {
+  background: #FFD54F; color: #5D4037; border-color: #F9A825;
+  transform: scale(1.1);
+}
+.setup-label {
+  font-size: 1.3rem; color: #E65100; font-weight: 900; margin-top: 4px;
+}
+.mode-buttons {
+  display: flex; gap: 12px;
+}
+.btn-mode {
+  padding: 10px 24px; font-size: 1rem;
+  background: #fff; color: #F9A825;
+  border: 3px solid #FFD54F;
+  transition: all 0.2s;
+}
+.btn-mode.active {
+  background: #FFD54F; color: #5D4037; border-color: #F9A825;
+}
+#player-names-area {
+  display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 260px;
+}
+.name-input-wrap { display: flex; flex-direction: column; gap: 4px; }
+.name-input-wrap label {
+  font-size: 0.85rem; font-weight: 700; color: #E65100; padding-left: 8px;
+}
+
+/* ============================================================
+   Game Screen
+   ============================================================ */
+#screen-game {
+  background: linear-gradient(180deg, #FFF9C4 0%, #FFEE58 30%, #FFD54F 100%);
+  justify-content: flex-start;
+}
+.game-header {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; padding: 6px 12px; z-index: 10;
+  position: relative;
+}
+.game-header .btn-back { position: relative; top: auto; left: auto; }
+.turn-indicator {
+  font-size: 1rem; font-weight: 900; color: #5D4037;
+  background: rgba(255,255,255,0.8); border-radius: 20px;
+  padding: 6px 16px;
+}
+.score-display {
+  display: flex; gap: 8px; font-size: 0.85rem; font-weight: 700;
+}
+.score-badge {
+  background: rgba(255,255,255,0.85); border-radius: 12px;
+  padding: 4px 10px; color: #5D4037;
+}
+.score-badge.active-player {
+  background: #66BB6A; color: #fff;
+}
+
+/* --- Pond --- */
+.pond-container {
+  flex: 1; display: flex; align-items: center; justify-content: center;
+  width: 100%; padding: 4px 8px;
+  overflow: visible;
+}
+.pond {
+  position: relative;
+  width: min(92vw, 75vh - 160px, 480px);
+  height: min(92vw, 75vh - 160px, 480px);
+  border-radius: 50%;
+  background: radial-gradient(circle, #4FC3F7 0%, #0288D1 60%, #01579B 100%);
+  box-shadow: 0 0 0 6px #81D4FA, 0 0 0 10px #4FC3F7, 0 8px 32px rgba(0,0,0,0.2);
+  overflow: visible;
+}
+
+/* Island in center */
+.pond-island {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 26%; height: 26%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #A5D6A7 0%, #66BB6A 60%, #43A047 100%);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 5;
+}
+.island-tree { font-size: 1.8rem; }
+
+/* --- Ducks on Pond --- */
+.duck {
+  position: absolute;
+  width: 48px; height: 48px;
+  cursor: pointer;
+  transition: transform 0.2s ease, filter 0.2s ease;
+  z-index: 6;
+  filter: drop-shadow(0 3px 4px rgba(0,0,0,0.25));
+}
+.duck:hover { transform: scale(1.15); z-index: 7; }
+.duck.selected {
+  filter: drop-shadow(0 0 12px #66BB6A) drop-shadow(0 3px 4px rgba(0,0,0,0.25));
+  z-index: 8;
+}
+.duck.matched {
+  animation: duck-matched 0.6s ease forwards;
+}
+@keyframes duck-matched {
+  0% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.8; }
+  100% { transform: scale(0); opacity: 0; }
+}
+.duck-img {
+  width: 48px; height: 48px;
+  display: block;
+  pointer-events: none;
+}
+.duck-emoji {
+  font-size: 2.2rem;
+  display: block; text-align: center; line-height: 48px;
+}
+
+/* Swimming animation */
+.duck.swimming {
+  /* Individual duck transform is set via JS inline style */
+}
+
+/* Ripple under swimming ducks */
+.duck-ripple {
+  position: absolute;
+  width: 40px; height: 12px;
+  bottom: -4px; left: 50%; transform: translateX(-50%);
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  animation: ripple-pulse 1.5s ease-in-out infinite;
+}
+@keyframes ripple-pulse {
+  0%, 100% { transform: translateX(-50%) scaleX(1); opacity: 0.3; }
+  50% { transform: translateX(-50%) scaleX(1.4); opacity: 0.1; }
+}
+
+/* --- Game Controls --- */
+.game-controls {
+  padding: 12px 16px 20px; z-index: 10;
+}
+.btn-swim {
+  font-size: 1rem; padding: 10px 24px;
+  background: linear-gradient(135deg, #66BB6A, #43A047);
+  color: #fff;
+}
+.btn-swim.active {
+  background: linear-gradient(135deg, #EF5350, #C62828);
+}
+
+/* --- Dock Area (picked ducks) --- */
+.dock-area {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  z-index: 10;
+  padding: 0 16px;
+  min-height: 110px;
+  margin-top: -100px;
+}
+.dock {
+  display: flex; justify-content: center; align-items: center;
+  gap: 24px;
+  width: 92vw; max-width: 480px;
+  min-height: 100px;
+  padding: 10px 24px;
+  background: #8D6E63;
+  border-radius: 6px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.25), inset 0 2px 0 rgba(255,255,255,0.1), inset 0 -2px 0 rgba(0,0,0,0.15);
+  position: relative;
+  border-top: 3px solid #A1887F;
+  border-bottom: 3px solid #5D4037;
+}
+/* Wood plank lines */
+.dock::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 6px;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 28px,
+    rgba(0,0,0,0.15) 28px,
+    rgba(0,0,0,0.15) 30px,
+    transparent 30px
+  );
+  pointer-events: none;
+}
+
+.dock-slot {
+  width: 85px; height: 85px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  perspective: 800px;
+}
+.dock-slot-empty {
+  opacity: 0.3;
+}
+
+/* Duck on dock (flippable) */
+.dock-duck {
+  width: 85px; height: 85px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease;
+}
+.dock-duck.flipped {
+  transform: rotateX(-180deg);
+}
+.dock-duck-front, .dock-duck-back {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  backface-visibility: hidden;
+}
+.dock-duck-front img {
+  width: 85px; height: 85px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+.dock-duck-back {
+  transform: rotateX(180deg);
+  font-size: 2.4rem; font-weight: 900; color: #E65100;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  width: 80px; height: 80px;
+  overflow: hidden;
+}
+.dock-duck-back svg {
+  display: block;
+}
+
+.flip-result {
+  font-size: 1.2rem; font-weight: 900;
+  min-height: 1.5em;
+}
+.flip-result.match { color: #2E7D32; }
+.flip-result.no-match { color: #C62828; }
+.flip-result.queen-match { color: #F9A825; font-size: 1.4rem; }
+
+/* ============================================================
+   Results Screen
+   ============================================================ */
+#screen-results {
+  background: linear-gradient(180deg, #FFFDE7 0%, #FFF176 50%, #FFD54F 100%);
+}
+.results-inner { gap: 16px; }
+.results-mascot {
+  font-size: 4rem;
+  animation: results-bounce 1s ease-in-out infinite;
+}
+@keyframes results-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+#screen-results h2 {
+  font-size: 2rem; font-weight: 900; color: #5D4037;
+}
+.results-scores {
+  display: flex; flex-direction: column; gap: 8px;
+  width: 100%; max-width: 280px;
+}
+.result-row {
+  display: flex; justify-content: space-between; align-items: center;
+  background: rgba(255,255,255,0.7); border-radius: 12px;
+  padding: 10px 16px; font-weight: 700; font-size: 1.1rem;
+  color: #5D4037;
+}
+.result-row.winner {
+  background: #66BB6A; color: #fff; box-shadow: 0 2px 8px rgba(67,160,71,0.4);
+}
+.results-winner {
+  font-size: 1.3rem; font-weight: 900; color: #E65100;
+  min-height: 1.5em;
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-height: 600px) {
+  .title-mascot { font-size: 3.5rem; }
+  .title-line1 { font-size: 1.6rem; }
+  .title-line2 { font-size: 2rem; }
+  .pond { width: min(95vw, 55vh, 380px); height: min(95vw, 55vh, 380px); }
+  .duck { width: 38px; height: 38px; }
+  .duck-img { width: 38px; height: 38px; }
+  .duck-emoji { font-size: 1.7rem; line-height: 38px; }
+  .island-tree { font-size: 1.3rem; }
+  .flip-duck { width: 64px; height: 64px; }
+}
+@media (min-width: 768px) {
+  .pond { width: min(60vw, 500px); height: min(60vw, 500px); }
+}
+
+/* --- Flying duck animation (pond to flip area) --- */
+.duck-flying {
+  position: fixed;
+  width: 48px; height: 48px;
+  z-index: 100;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.duck-flying img {
+  width: 100%; height: 100%;
+}
+
+/* ============================================================
+   Utility
+   ============================================================ */
+.hidden { opacity: 0; visibility: hidden; pointer-events: none; }

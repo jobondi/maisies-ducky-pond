@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="screen-orientation" content="portrait">
+  <meta name="theme-color" content="#FFD54F">
+  <title>Maisie's Ducky Pond</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Title / Splash Screen -->
+  <div id="screen-title" class="screen active">
+    <div class="title-content">
+      <div class="title-bubbles">
+        <span class="bubble b1"></span>
+        <span class="bubble b2"></span>
+        <span class="bubble b3"></span>
+        <span class="bubble b4"></span>
+        <span class="bubble b5"></span>
+      </div>
+      <div class="title-mascot">&#x1F425;</div>
+      <h1 class="title-text">
+        <span class="title-line1">Maisie's</span>
+        <span class="title-line2">Ducky Pond</span>
+      </h1>
+      <div class="title-sparkles">&#x2728; &#x1F9C6; &#x2728;</div>
+      <button id="btn-start" class="btn-ducky btn-primary">
+        <span>Let's Play!</span>
+      </button>
+    </div>
+    <div class="title-waves">
+      <div class="wave wave-1"></div>
+      <div class="wave wave-2"></div>
+    </div>
+  </div>
+
+  <!-- Player Setup Screen -->
+  <div id="screen-setup" class="screen">
+    <div class="screen-inner">
+      <button class="btn-back" id="btn-back-setup">&#x2190;</button>
+      <div class="setup-mascot">&#x1F425;</div>
+      <h2>How many players?</h2>
+      <div class="player-count-buttons">
+        <button class="btn-ducky btn-count active" data-count="1">1</button>
+        <button class="btn-ducky btn-count" data-count="2">2</button>
+        <button class="btn-ducky btn-count" data-count="3">3</button>
+      </div>
+      <h2 class="setup-label">Match by...</h2>
+      <div class="mode-buttons">
+        <button class="btn-ducky btn-mode active" data-mode="shapes">Shapes</button>
+        <button class="btn-ducky btn-mode" data-mode="numbers">Numbers</button>
+      </div>
+      <div id="player-names-area">
+        <div class="name-input-wrap">
+          <label>Player 1</label>
+          <input type="text" class="input-ducky player-name-input" placeholder="Name..." maxlength="15" autocomplete="off">
+        </div>
+      </div>
+      <button id="btn-play" class="btn-ducky btn-primary" disabled>
+        <span>Start!</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Game Screen -->
+  <div id="screen-game" class="screen">
+    <div class="game-header">
+      <button class="btn-back" id="btn-back-game">&#x2190;</button>
+      <div id="turn-indicator" class="turn-indicator">Player 1's turn</div>
+      <div id="score-display" class="score-display"></div>
+    </div>
+    <div id="pond-container" class="pond-container">
+      <div id="pond" class="pond">
+        <div class="pond-island">
+          <div class="island-tree">&#x1F334;</div>
+        </div>
+        <!-- Ducks are rendered by JS -->
+      </div>
+    </div>
+    <div id="dock-area" class="dock-area">
+      <div id="dock" class="dock">
+        <div id="dock-slot-1" class="dock-slot"></div>
+        <div id="dock-slot-2" class="dock-slot"></div>
+      </div>
+      <div id="flip-result" class="flip-result"></div>
+    </div>
+    <div class="game-controls">
+      <button id="btn-toggle-swim" class="btn-ducky btn-swim">&#x25B6; Resume</button>
+    </div>
+  </div>
+
+  <!-- Results Screen -->
+  <div id="screen-results" class="screen">
+    <div class="screen-inner results-inner">
+      <div class="results-mascot">&#x1F389;</div>
+      <h2 id="results-title">Great Job!</h2>
+      <div id="results-scores" class="results-scores"></div>
+      <div id="results-winner" class="results-winner"></div>
+      <button id="btn-play-again" class="btn-ducky btn-primary">
+        <span>Play Again!</span>
+      </button>
+      <button id="btn-back-home" class="btn-ducky btn-secondary">
+        <span>Home</span>
+      </button>
+    </div>
+  </div>
+
+  <script src="js/game-engine.js"></script>
+  <script src="js/game-ui.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

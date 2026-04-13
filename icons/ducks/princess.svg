@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <ellipse cx="50" cy="68" rx="30" ry="22" fill="#FFD54F"/>
+  <circle cx="50" cy="38" r="20" fill="#FFD54F"/>
+  <ellipse cx="50" cy="45" rx="8" ry="4" fill="#FF8F00"/>
+  <circle cx="43" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="57" cy="34" r="3" fill="#3E2723"/>
+  <circle cx="44" cy="33" r="1" fill="#fff"/>
+  <circle cx="58" cy="33" r="1" fill="#fff"/>
+  <circle cx="38" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <circle cx="62" cy="40" r="4" fill="#FFAB91" opacity="0.4"/>
+  <ellipse cx="28" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(-15 28 65)"/>
+  <ellipse cx="72" cy="65" rx="10" ry="14" fill="#FFC107" transform="rotate(15 72 65)"/>
+  <!-- Tiara -->
+  <path d="M35,24 L38,16 L42,22 L46,14 L50,22 L54,14 L58,22 L62,16 L65,24" fill="none" stroke="#F48FB1" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Gems on tiara -->
+  <circle cx="46" cy="15" r="2" fill="#CE93D8"/>
+  <circle cx="50" cy="13" r="2.5" fill="#F48FB1"/>
+  <circle cx="54" cy="15" r="2" fill="#CE93D8"/>
+  <!-- Eyelashes -->
+  <line x1="40" y1="31" x2="38" y2="29" stroke="#3E2723" stroke-width="1" stroke-linecap="round"/>
+  <line x1="43" y1="30" x2="43" y2="28" stroke="#3E2723" stroke-width="1" stroke-linecap="round"/>
+  <line x1="57" y1="30" x2="57" y2="28" stroke="#3E2723" stroke-width="1" stroke-linecap="round"/>
+  <line x1="60" y1="31" x2="62" y2="29" stroke="#3E2723" stroke-width="1" stroke-linecap="round"/>
+  <!-- Pink bow -->
+  <ellipse cx="68" cy="32" rx="6" ry="4" fill="#F48FB1" transform="rotate(-20 68 32)"/>
+  <ellipse cx="72" cy="36" rx="6" ry="4" fill="#F48FB1" transform="rotate(20 72 36)"/>
+  <circle cx="70" cy="34" r="2" fill="#EC407A"/>
+</svg>
