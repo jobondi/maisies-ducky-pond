@@ -501,24 +501,30 @@ html, body {
 /* --- Pond splash effect --- */
 .pond-splash {
   position: absolute;
-  width: 40px; height: 40px;
+  width: 50px; height: 50px;
   border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.5);
+  border: 2px solid rgba(255,255,255,0.45);
   z-index: 7;
   pointer-events: none;
-  animation: splash-ring 0.5s ease-out forwards;
+  animation: splash-ring 0.8s ease-out forwards;
 }
 .pond-splash::after {
   content: '';
   position: absolute; inset: -6px;
   border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.25);
-  animation: splash-ring 0.5s ease-out 0.1s forwards;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  animation: splash-ring-outer 0.9s ease-out 0.15s forwards;
   opacity: 0;
 }
 @keyframes splash-ring {
-  0% { transform: scale(0.3); opacity: 0.8; }
+  0% { transform: scale(0.1); opacity: 0.5; }
+  30% { opacity: 0.4; }
   100% { transform: scale(2); opacity: 0; }
+}
+@keyframes splash-ring-outer {
+  0% { transform: scale(0.1); opacity: 0; }
+  10% { opacity: 0.25; }
+  100% { transform: scale(2.5); opacity: 0; }
 }
 
 .version-tag {

@@ -537,13 +537,16 @@
   }
 
   // --- Fly duck from dock back to pond ---
+  // Uses JS animation frame loop to track the orbiting duck's live
+  // position, so the flyer homes in on the moving target smoothly.
   function flyDuckBackToPond(slot, pondEl, callback) {
     var slotRect = slot.getBoundingClientRect();
-    var pondRect = pondEl.getBoundingClientRect();
 
     var frontImg = slot.querySelector('.dock-duck-front img');
     var flyer = document.createElement('div');
-    flyer.className = 'duck-flying duck-flying-return';
+    flyer.className = 'duck-flying';
+    // Disable CSS transition; we'll animate manually via RAF
+    flyer.style.transition = 'none';
     if (frontImg) {
       var flyImg = document.createElement('img');
       flyImg.src = frontImg.src;
@@ -553,40 +556,62 @@
 
     slot.innerHTML = '';
 
-    // Start at dock position, scaled up (dock size)
-    flyer.style.left = (slotRect.left + slotRect.width / 2 - 28) + 'px';
-    flyer.style.top = (slotRect.top + slotRect.height / 2 - 28) + 'px';
-    flyer.style.transform = 'scale(1.7)';
+    // Start position (dock), start scale (dock size)
+    var startX = slotRect.left + slotRect.width / 2 - 28;
+    var startY = slotRect.top + slotRect.height / 2 - 28;
+    var startScale = 1.7;
+    var endScale = 1.0;
+    var duration = 550;
+    var startTime = null;
+
+    flyer.style.left = startX + 'px';
+    flyer.style.top = startY + 'px';
+    flyer.style.transform = 'scale(' + startScale + ')';
     document.body.appendChild(flyer);
 
-    // Fly back to pond position, scale down to pond size
-    requestAnimationFrame(function () {
-      flyer.style.left = (pondRect.left + pondRect.width / 2 - 28) + 'px';
-      flyer.style.top = (pondRect.top + pondRect.height / 2 - 28) + 'px';
-      flyer.style.transform = 'scale(1)';
-    });
+    function animateReturn(timestamp) {
+      if (!startTime) startTime = timestamp;
+      var elapsed = timestamp - startTime;
+      var t = Math.min(elapsed / duration, 1);
+      // ease-out: decelerate into landing
+      var ease = 1 - Math.pow(1 - t, 3);
 
-    setTimeout(function () {
-      flyer.remove();
-      pondEl.style.opacity = '';
-      pondEl.classList.remove('selected');
+      // Get duck's CURRENT position (it's orbiting)
+      var targetRect = pondEl.getBoundingClientRect();
+      var endX = targetRect.left + targetRect.width / 2 - 28;
+      var endY = targetRect.top + targetRect.height / 2 - 28;
 
-      // Splash effect
-      var splash = document.createElement('div');
-      splash.className = 'pond-splash';
-      splash.style.left = (pondRect.width / 2 - 20) + 'px';
-      splash.style.top = (pondRect.height / 2 - 20) + 'px';
-      // Position relative to pond element's position within its parent
-      var pondParentRect = pond.getBoundingClientRect();
-      var relX = pondRect.left - pondParentRect.left + pondRect.width / 2;
-      var relY = pondRect.top - pondParentRect.top + pondRect.height / 2;
-      splash.style.left = (relX - 20) + 'px';
-      splash.style.top = (relY - 20) + 'px';
-      pond.appendChild(splash);
-      setTimeout(function () { splash.remove(); }, 600);
+      var curX = startX + (endX - startX) * ease;
+      var curY = startY + (endY - startY) * ease;
+      var curScale = startScale + (endScale - startScale) * ease;
 
-      if (callback) callback();
-    }, 600);
+      flyer.style.left = curX + 'px';
+      flyer.style.top = curY + 'px';
+      flyer.style.transform = 'scale(' + curScale + ')';
+
+      if (t < 1) {
+        requestAnimationFrame(animateReturn);
+      } else {
+        // Get flyer's exact final position before removing it
+        var finalRect = flyer.getBoundingClientRect();
+        var pondRect = pond.getBoundingClientRect();
+        flyer.remove();
+        pondEl.style.opacity = '';
+        pondEl.classList.remove('selected');
+
+        // Splash exactly where the duck landed
+        var splash = document.createElement('div');
+        splash.className = 'pond-splash';
+        splash.style.left = (finalRect.left - pondRect.left + finalRect.width / 2 - 25) + 'px';
+        splash.style.top = (finalRect.top - pondRect.top + finalRect.height / 2 - 25) + 'px';
+        pond.appendChild(splash);
+        setTimeout(function () { splash.remove(); }, 900);
+
+        if (callback) callback();
+      }
+    }
+
+    requestAnimationFrame(animateReturn);
   }
 
   function handleNoMatch(result) {
