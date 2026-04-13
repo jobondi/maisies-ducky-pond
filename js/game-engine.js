@@ -32,8 +32,8 @@
 
   // --- Shapes catalog ---
   var SHAPES = [
-    { key: 'circle',   name: 'Circle',   color: '#C62828' },
-    { key: 'square',   name: 'Square',   color: '#1565C0' },
+    { key: 'circle',   name: 'Circle',   color: '#1565C0' },
+    { key: 'square',   name: 'Square',   color: '#C62828' },
     { key: 'triangle', name: 'Triangle', color: '#2E7D32' },
     { key: 'moon',     name: 'Moon',     color: '#4A148C' },
     { key: 'diamond',  name: 'Diamond',  color: '#6A1B9A' },

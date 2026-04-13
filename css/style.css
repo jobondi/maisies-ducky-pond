@@ -249,7 +249,7 @@ html, body {
 /* --- Ducks on Pond --- */
 .duck {
   position: absolute;
-  width: 48px; height: 48px;
+  width: 56px; height: 56px;
   cursor: pointer;
   transition: transform 0.2s ease, filter 0.2s ease;
   z-index: 6;
@@ -269,7 +269,7 @@ html, body {
   100% { transform: scale(0); opacity: 0; }
 }
 .duck-img {
-  width: 48px; height: 48px;
+  width: 56px; height: 56px;
   display: block;
   pointer-events: none;
 }
@@ -322,7 +322,7 @@ html, body {
   display: flex; justify-content: center; align-items: center;
   gap: 24px;
   width: 92vw; max-width: 480px;
-  min-height: 100px;
+  min-height: 110px;
   padding: 10px 24px;
   background: #8D6E63;
   border-radius: 6px;
@@ -348,7 +348,7 @@ html, body {
 }
 
 .dock-slot {
-  width: 85px; height: 85px;
+  width: 95px; height: 95px;
   display: flex; align-items: center; justify-content: center;
   position: relative;
   perspective: 800px;
@@ -359,7 +359,7 @@ html, body {
 
 /* Duck on dock (flippable) */
 .dock-duck {
-  width: 85px; height: 85px;
+  width: 95px; height: 95px;
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.6s ease;
@@ -373,7 +373,7 @@ html, body {
   backface-visibility: hidden;
 }
 .dock-duck-front img {
-  width: 85px; height: 85px;
+  width: 95px; height: 95px;
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
 }
 .dock-duck-back {
@@ -382,7 +382,7 @@ html, body {
   background: #fff;
   border-radius: 50%;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  width: 80px; height: 80px;
+  width: 88px; height: 88px;
   overflow: hidden;
 }
 .dock-duck-back svg {
@@ -441,8 +441,8 @@ html, body {
   .title-line1 { font-size: 1.6rem; }
   .title-line2 { font-size: 2rem; }
   .pond { width: min(95vw, 55vh, 380px); height: min(95vw, 55vh, 380px); }
-  .duck { width: 38px; height: 38px; }
-  .duck-img { width: 38px; height: 38px; }
+  .duck { width: 44px; height: 44px; }
+  .duck-img { width: 44px; height: 44px; }
   .duck-emoji { font-size: 1.7rem; line-height: 38px; }
   .island-tree { font-size: 1.3rem; }
   .flip-duck { width: 64px; height: 64px; }
@@ -457,10 +457,36 @@ html, body {
   width: 48px; height: 48px;
   z-index: 100;
   pointer-events: none;
-  transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition: left 0.5s ease-in-out, top 0.5s ease-in-out, transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
 }
 .duck-flying img {
   width: 100%; height: 100%;
+}
+
+/* --- Score bounce animation --- */
+.score-badge.score-pop {
+  animation: score-pop 0.6s ease;
+}
+@keyframes score-pop {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.5); }
+  50% { transform: scale(1.3); }
+  70% { transform: scale(1.45); }
+  100% { transform: scale(1); }
+}
+
+/* --- Confetti --- */
+.confetti-piece {
+  position: fixed;
+  width: 8px; height: 8px;
+  z-index: 200;
+  pointer-events: none;
+  border-radius: 2px;
+  animation: confetti-fall 1.2s ease-out forwards;
+}
+@keyframes confetti-fall {
+  0% { transform: translateY(0) rotate(0deg) scale(1); opacity: 1; }
+  100% { transform: translateY(120px) rotate(720deg) scale(0.3); opacity: 0; }
 }
 
 /* ============================================================

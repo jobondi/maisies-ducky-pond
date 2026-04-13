@@ -101,14 +101,19 @@ describe('DuckyEngine', function () {
 
     test('matching pair returns match event', function () {
       var state = DuckyEngine.createGame({ numPairs: 6, playerNames: ['A'] });
-      // Find a matching pair
-      var first = state.ducks[0];
+      // Find a non-queen matching pair
+      var first = null;
       var second = null;
-      for (var i = 1; i < state.ducks.length; i++) {
-        if (state.ducks[i].matchValue === first.matchValue) {
-          second = state.ducks[i];
-          break;
+      for (var i = 0; i < state.ducks.length; i++) {
+        if (state.ducks[i].character.isQueen) continue;
+        for (var j = i + 1; j < state.ducks.length; j++) {
+          if (state.ducks[j].matchValue === state.ducks[i].matchValue && !state.ducks[j].character.isQueen) {
+            first = state.ducks[i];
+            second = state.ducks[j];
+            break;
+          }
         }
+        if (first) break;
       }
       var r1 = DuckyEngine.pickDuck(state, first.id);
       var r2 = DuckyEngine.pickDuck(r1.state, second.id);
@@ -265,6 +270,88 @@ describe('DuckyEngine', function () {
       var results = DuckyEngine.getResults(state);
       expect(results.winners).toEqual([0, 1]);
       expect(results.isTie).toBe(true);
+    });
+  });
+
+  describe('game modes', function () {
+    test('shapes mode assigns shape objects as matchDisplay', function () {
+      var state = DuckyEngine.createGame({ numPairs: 8, playerNames: ['A'], mode: 'shapes' });
+      state.ducks.forEach(function (d) {
+        expect(d.matchDisplay).toBeDefined();
+        expect(typeof d.matchDisplay).toBe('object');
+        expect(d.matchDisplay.key).toBeDefined();
+        expect(d.matchDisplay.color).toBeDefined();
+      });
+    });
+
+    test('numbers mode assigns numbers as matchDisplay', function () {
+      var state = DuckyEngine.createGame({ numPairs: 8, playerNames: ['A'], mode: 'numbers' });
+      state.ducks.forEach(function (d) {
+        expect(typeof d.matchDisplay).toBe('number');
+        expect(d.matchDisplay).toBeGreaterThanOrEqual(1);
+        expect(d.matchDisplay).toBeLessThanOrEqual(8);
+      });
+    });
+
+    test('defaults to shapes mode', function () {
+      var state = DuckyEngine.createGame({ numPairs: 8, playerNames: ['A'] });
+      expect(state.mode).toBe('shapes');
+    });
+
+    test('8 unique shapes available', function () {
+      expect(DuckyEngine.SHAPES.length).toBe(8);
+      var keys = DuckyEngine.SHAPES.map(function (s) { return s.key; });
+      var unique = keys.filter(function (k, i) { return keys.indexOf(k) === i; });
+      expect(unique.length).toBe(8);
+    });
+  });
+
+  describe('Queen Duck bonus', function () {
+    test('queen match gives 1001 points', function () {
+      var state = DuckyEngine.createGame({ numPairs: 8, playerNames: ['A'] });
+      // Find the queen duck pair
+      var queen1 = null;
+      var queen2 = null;
+      for (var i = 0; i < state.ducks.length; i++) {
+        if (state.ducks[i].character.isQueen) {
+          if (!queen1) queen1 = state.ducks[i];
+          else queen2 = state.ducks[i];
+        }
+      }
+      // Queen pair shares a matchValue, so find the partner by matchValue
+      if (!queen2) {
+        for (var i = 0; i < state.ducks.length; i++) {
+          if (state.ducks[i].matchValue === queen1.matchValue && state.ducks[i].id !== queen1.id) {
+            queen2 = state.ducks[i];
+            break;
+          }
+        }
+      }
+      var r1 = DuckyEngine.pickDuck(state, queen1.id);
+      var r2 = DuckyEngine.pickDuck(r1.state, queen2.id);
+      expect(r2.state.scores[0]).toBe(1001);
+      expect(r2.isQueenMatch).toBe(true);
+    });
+
+    test('non-queen match gives 1 point', function () {
+      var state = DuckyEngine.createGame({ numPairs: 8, playerNames: ['A'] });
+      var first = null;
+      var second = null;
+      for (var i = 0; i < state.ducks.length; i++) {
+        if (state.ducks[i].character.isQueen) continue;
+        for (var j = i + 1; j < state.ducks.length; j++) {
+          if (state.ducks[j].matchValue === state.ducks[i].matchValue && !state.ducks[j].character.isQueen) {
+            first = state.ducks[i];
+            second = state.ducks[j];
+            break;
+          }
+        }
+        if (first) break;
+      }
+      var r1 = DuckyEngine.pickDuck(state, first.id);
+      var r2 = DuckyEngine.pickDuck(r1.state, second.id);
+      expect(r2.state.scores[0]).toBe(1);
+      expect(r2.isQueenMatch).toBe(false);
     });
   });
 

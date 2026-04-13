@@ -84,14 +84,15 @@ docs/SPEC.md                — This file
 
 ### 4.3 Game Screen
 - **Header:** Back button, turn indicator, score badges (green for active player)
-- **Pond:** Circular blue pond with green island and palm tree center, 16 unique rubber duck characters swimming in a circle
-- **Dock:** Wooden dock below the pond with plank texture, holds 2 picked ducks
-- **Pause button:** At the bottom, toggles duck swimming animation and ambient music
+- **Pond:** Circular blue pond (92vw, max 480px) with green island and palm tree center, 16 unique rubber duck characters (56px) swimming in a circle
+- **Dock:** Wooden dock (same width as pond) below the pond with plank board texture, holds 2 picked ducks (95px on dock). Shape/number revealed on white circle (88px) on the back.
+- **Pause/Resume button:** At the bottom, toggles duck swimming animation and ambient music
 
 ### 4.4 Results Screen
 - Party emoji mascot with bounce animation
-- Score rows for each player (winner highlighted in green)
+- Score rows for each player showing points (winner highlighted in green)
 - Winner announcement or tie message
+- Solo mode shows total turns taken
 - "Play Again!" and "Home" buttons
 
 ---
@@ -141,8 +142,8 @@ Each game randomly selects 16 of the 20 characters (8 pairs).
 
 | Shape | Color |
 |-------|-------|
-| Circle | Dark red (#C62828) |
-| Square | Dark blue (#1565C0) |
+| Circle | Dark blue (#1565C0) |
+| Square | Dark red (#C62828) |
 | Triangle | Dark green (#2E7D32) |
 | Crescent Moon | Deep purple (#4A148C) |
 | Diamond | Dark purple (#6A1B9A) |
@@ -156,8 +157,14 @@ Each game randomly selects 16 of the 20 characters (8 pairs).
 3. Duck character is visible on the dock for **1 second**, then flips upward (rotateX) to reveal the shape/number underneath
 4. Player taps a second duck; it flies to the right dock slot
 5. Duck character is visible for **1.5 seconds** (suspense), then flips to reveal
-6. **Match:** "Match! +1 point!" message, both ducks disappear from pond, same player goes again
-7. **No match:** "No match!" message for 1 second, then both ducks flip back to show characters for **1.25 seconds** (one last look), then fly back to their positions in the pond. Turn passes to next player.
+6. **Match celebration sequence:**
+   - "Match! +1 point!" (or "Queen Duck! +1,000 BONUS!") message appears
+   - After 0.8s, both ducks flip back to show their characters
+   - After 0.5s, both ducks fly up to the active player's score badge, shrinking and fading as they travel
+   - Score badge does a pop-bounce animation (scales up 1.5x then settles)
+   - Confetti bursts from the score badge (15 pieces, or 30 for Queen Duck)
+   - Score updates, same player goes again
+7. **No match:** "No match!" message for 1 second, then both ducks flip back to show characters for **1.25 seconds** (one last look to memorize), then fly back to their positions in the pond. Turn passes to next player.
 8. Input is locked during all animations to prevent race conditions
 
 ### 6.4 Queen Duck Bonus
@@ -182,14 +189,20 @@ When a player matches the Queen Duck pair, they receive **1,000 bonus points** o
 
 | Animation | Duration | Details |
 |-----------|----------|---------|
-| Duck fly to dock | 500ms | Cubic-bezier bounce, duck scales up slightly |
+| Duck fly to dock | 500ms | Ease-in-out, no scale change, smooth glide |
 | First duck reveal | 1,000ms | Time on dock before flip |
 | Second duck reveal | 1,500ms | Longer pause for suspense |
 | Flip animation | 600ms | RotateX (-180deg), flips upward like turning duck over |
+| Match message | 800ms | Shown before ducks fly to score |
+| Match: ducks flip back | 500ms | Show characters one more time before flying to score |
+| Match: fly to score | 500ms | Ducks shrink and fade as they fly up to score badge |
+| Score pop-bounce | 600ms | Badge scales to 1.5x then settles back |
+| Confetti burst | 1,000ms | 15 pieces (30 for Queen), spread outward and fade |
 | No-match linger | 1,250ms | Ducks flip back, show characters one more time |
-| Duck fly back to pond | 500ms | Reverse of fly-to-dock |
-| Matched duck exit | 600ms | Scale up then shrink to 0 with fade |
+| Duck fly back to pond | 500ms | Ease-in-out, reverse of fly-to-dock |
 | Screen transitions | 350ms | Opacity fade |
+
+**Easing:** All duck flight animations use `ease-in-out` for smooth acceleration and deceleration with no overshoot or bounce.
 
 ---
 
@@ -226,7 +239,7 @@ Generated via Web Audio API (no audio files):
 
 ## 11. Future Ideas
 
-- Queen Duck bonus animation (special sparkle/crown effect)
+- Queen Duck special sparkle/crown animation on bonus
 - Sound effects toggle in settings
 - Difficulty levels (fewer/more pairs)
 - Timed mode

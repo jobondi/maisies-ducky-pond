@@ -139,7 +139,7 @@
     var cx = pondRect.width / 2;
     var cy = pondRect.height / 2;
     var radius = getPondRadius();
-    var duckSize = 48;
+    var duckSize = 56;
 
     duckElements.forEach(function (el) {
       var id = parseInt(el.getAttribute('data-id'), 10);
@@ -269,11 +269,10 @@
     // Hide the pond duck
     pondEl.style.opacity = '0';
 
-    // Fly to flip slot center
+    // Fly to dock slot center, no scale change
     requestAnimationFrame(function () {
       flyer.style.left = (flipRect.left + flipRect.width / 2 - 24) + 'px';
       flyer.style.top = (flipRect.top + flipRect.height / 2 - 24) + 'px';
-      flyer.style.transform = 'scale(1.2)';
     });
 
     // When arrived, remove flyer and run callback
@@ -331,7 +330,7 @@
       circle:   '<circle cx="25" cy="25" r="20" fill="' + shape.color + '"/>',
       square:   '<rect x="5" y="5" width="40" height="40" rx="3" fill="' + shape.color + '"/>',
       triangle: '<polygon points="25,3 47,44 3,44" fill="' + shape.color + '"/>',
-      moon:     '<path d="M30,5 A20,20 0 1,0 30,45 A14,14 0 1,1 30,5" fill="' + shape.color + '"/>',
+      moon:     '<circle cx="23" cy="25" r="18" fill="' + shape.color + '"/><circle cx="33" cy="22" r="14" fill="#fff"/>',
       diamond:  '<polygon points="25,2 46,25 25,48 4,25" fill="' + shape.color + '"/>',
       star:     '<polygon points="25,2 31,18 48,18 34,28 39,45 25,35 11,45 16,28 2,18 19,18" fill="' + shape.color + '"/>',
       hexagon:  '<polygon points="25,3 44,14 44,36 25,47 6,36 6,14" fill="' + shape.color + '"/>',
@@ -402,6 +401,73 @@
     flipResult.className = 'flip-result';
   }
 
+  // --- Confetti burst ---
+  function burstConfetti(x, y, count) {
+    var colors = ['#E53935', '#FFD54F', '#43A047', '#1E88E5', '#FF8F00', '#8E24AA', '#00ACC1', '#F48FB1'];
+    for (var i = 0; i < count; i++) {
+      var piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.left = x + 'px';
+      piece.style.top = y + 'px';
+      piece.style.background = colors[Math.floor(Math.random() * colors.length)];
+      // Random spread direction
+      var angle = (Math.random() * 360) * Math.PI / 180;
+      var dist = 40 + Math.random() * 80;
+      var dx = Math.cos(angle) * dist;
+      var dy = Math.sin(angle) * dist - 60; // bias upward
+      piece.style.animation = 'none';
+      document.body.appendChild(piece);
+      // Trigger custom animation via inline style
+      requestAnimationFrame(function (p, ddx, ddy) {
+        return function () {
+          p.style.transition = 'all 1s ease-out';
+          p.style.left = (parseFloat(p.style.left) + ddx) + 'px';
+          p.style.top = (parseFloat(p.style.top) + ddy) + 'px';
+          p.style.transform = 'rotate(' + (Math.random() * 720 - 360) + 'deg) scale(0.2)';
+          p.style.opacity = '0';
+        };
+      }(piece, dx, dy));
+      setTimeout(function (p) { return function () { p.remove(); }; }(piece), 1100);
+    }
+  }
+
+  // --- Fly duck from dock to scoreboard ---
+  function flyDuckToScore(slot, callback) {
+    var slotRect = slot.getBoundingClientRect();
+    // Find the active player's score badge
+    var activeBadge = scoreDisplay.querySelector('.score-badge.active-player');
+    if (!activeBadge) activeBadge = scoreDisplay.querySelector('.score-badge');
+    var targetRect = activeBadge ? activeBadge.getBoundingClientRect() : { left: window.innerWidth / 2, top: 0, width: 60, height: 30 };
+
+    var frontImg = slot.querySelector('.dock-duck-front img');
+    var flyer = document.createElement('div');
+    flyer.className = 'duck-flying';
+    if (frontImg) {
+      var flyImg = document.createElement('img');
+      flyImg.src = frontImg.src;
+      flyImg.alt = frontImg.alt;
+      flyer.appendChild(flyImg);
+    }
+
+    slot.innerHTML = '';
+
+    flyer.style.left = (slotRect.left + slotRect.width / 2 - 24) + 'px';
+    flyer.style.top = (slotRect.top + slotRect.height / 2 - 24) + 'px';
+    document.body.appendChild(flyer);
+
+    requestAnimationFrame(function () {
+      flyer.style.left = (targetRect.left + targetRect.width / 2 - 24) + 'px';
+      flyer.style.top = (targetRect.top + targetRect.height / 2 - 24) + 'px';
+      flyer.style.transform = 'scale(0.3)';
+      flyer.style.opacity = '0.5';
+    });
+
+    setTimeout(function () {
+      flyer.remove();
+      if (callback) callback();
+    }, 550);
+  }
+
   function handleMatch(result) {
     setTimeout(function () {
       playMatchSound();
@@ -416,22 +482,54 @@
       if (pickedPondEl1) pickedPondEl1.classList.add('matched');
       if (pickedPondEl2) pickedPondEl2.classList.add('matched');
 
+      // After showing match message, fly ducks to scoreboard
       setTimeout(function () {
-        state = DuckyEngine.resolveTurn(state);
-        updateHUD();
-        positionDucks();
-        clearDock();
-        pickedPondEl1 = null;
-        pickedPondEl2 = null;
-        animating = false;
+        // Flip ducks back to show characters before flying
+        var dd1 = dockSlot1.querySelector('.dock-duck');
+        var dd2 = dockSlot2.querySelector('.dock-duck');
+        if (dd1) dd1.classList.remove('flipped');
+        if (dd2) dd2.classList.remove('flipped');
 
-        if (result.event === 'game-over') {
-          setTimeout(function () {
-            stopSwimming();
-            window.duckNavigateTo('results');
-          }, 400);
-        }
-      }, 1200);
+        setTimeout(function () {
+          var done = 0;
+          function onBothLanded() {
+            done++;
+            if (done >= 2) {
+              // Update state and score
+              state = DuckyEngine.resolveTurn(state);
+              updateHUD();
+              positionDucks();
+
+              // Bounce the score badge
+              var activeBadge = scoreDisplay.querySelector('.score-badge.active-player') || scoreDisplay.querySelector('.score-badge');
+              if (activeBadge) {
+                activeBadge.classList.remove('score-pop');
+                void activeBadge.offsetWidth; // force reflow
+                activeBadge.classList.add('score-pop');
+              }
+
+              // Confetti burst from the score badge
+              var badgeRect = activeBadge ? activeBadge.getBoundingClientRect() : { left: window.innerWidth / 2, top: 50 };
+              burstConfetti(badgeRect.left + (badgeRect.width || 0) / 2, badgeRect.top + (badgeRect.height || 0) / 2, result.isQueenMatch ? 30 : 15);
+
+              flipResult.textContent = '';
+              pickedPondEl1 = null;
+              pickedPondEl2 = null;
+              animating = false;
+
+              if (result.event === 'game-over') {
+                setTimeout(function () {
+                  stopSwimming();
+                  window.duckNavigateTo('results');
+                }, 800);
+              }
+            }
+          }
+
+          flyDuckToScore(dockSlot1, onBothLanded);
+          flyDuckToScore(dockSlot2, onBothLanded);
+        }, 500);
+      }, 800);
     }, 600);
   }
 
@@ -456,13 +554,11 @@
 
     flyer.style.left = (slotRect.left + slotRect.width / 2 - 24) + 'px';
     flyer.style.top = (slotRect.top + slotRect.height / 2 - 24) + 'px';
-    flyer.style.transform = 'scale(1.2)';
     document.body.appendChild(flyer);
 
     requestAnimationFrame(function () {
       flyer.style.left = pondRect.left + 'px';
       flyer.style.top = pondRect.top + 'px';
-      flyer.style.transform = 'scale(1)';
     });
 
     setTimeout(function () {
