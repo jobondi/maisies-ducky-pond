@@ -1,5 +1,5 @@
 // Service Worker — network-first for HTML/JS, cache-first for fonts/images
-var CACHE_NAME = 'ducky-pond-v2';
+var CACHE_NAME = 'ducky-pond-v3';
 var ASSETS = [
   '/',
   '/index.html',
