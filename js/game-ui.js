@@ -269,10 +269,11 @@
     // Hide the pond duck
     pondEl.style.opacity = '0';
 
-    // Fly to dock slot center, no scale change
+    // Fly to dock slot center, scale up to dock size
     requestAnimationFrame(function () {
-      flyer.style.left = (flipRect.left + flipRect.width / 2 - 24) + 'px';
-      flyer.style.top = (flipRect.top + flipRect.height / 2 - 24) + 'px';
+      flyer.style.left = (flipRect.left + flipRect.width / 2 - 28) + 'px';
+      flyer.style.top = (flipRect.top + flipRect.height / 2 - 28) + 'px';
+      flyer.style.transform = 'scale(1.7)';
     });
 
     // When arrived, remove flyer and run callback
@@ -434,14 +435,13 @@
   // --- Fly duck from dock to scoreboard ---
   function flyDuckToScore(slot, callback) {
     var slotRect = slot.getBoundingClientRect();
-    // Find the active player's score badge
     var activeBadge = scoreDisplay.querySelector('.score-badge.active-player');
     if (!activeBadge) activeBadge = scoreDisplay.querySelector('.score-badge');
     var targetRect = activeBadge ? activeBadge.getBoundingClientRect() : { left: window.innerWidth / 2, top: 0, width: 60, height: 30 };
 
     var frontImg = slot.querySelector('.dock-duck-front img');
     var flyer = document.createElement('div');
-    flyer.className = 'duck-flying';
+    flyer.className = 'duck-flying duck-flying-to-score';
     if (frontImg) {
       var flyImg = document.createElement('img');
       flyImg.src = frontImg.src;
@@ -451,21 +451,24 @@
 
     slot.innerHTML = '';
 
-    flyer.style.left = (slotRect.left + slotRect.width / 2 - 24) + 'px';
-    flyer.style.top = (slotRect.top + slotRect.height / 2 - 24) + 'px';
+    // Start at dock position, big
+    flyer.style.left = (slotRect.left + slotRect.width / 2 - 28) + 'px';
+    flyer.style.top = (slotRect.top + slotRect.height / 2 - 28) + 'px';
+    flyer.style.transform = 'scale(1.7)';
     document.body.appendChild(flyer);
 
+    // Fly up to score badge, shrinking along the way
     requestAnimationFrame(function () {
-      flyer.style.left = (targetRect.left + targetRect.width / 2 - 24) + 'px';
-      flyer.style.top = (targetRect.top + targetRect.height / 2 - 24) + 'px';
-      flyer.style.transform = 'scale(0.3)';
-      flyer.style.opacity = '0.5';
+      flyer.style.left = (targetRect.left + targetRect.width / 2 - 28) + 'px';
+      flyer.style.top = (targetRect.top + targetRect.height / 2 - 28) + 'px';
+      flyer.style.transform = 'scale(0.4)';
+      flyer.style.opacity = '0';
     });
 
     setTimeout(function () {
       flyer.remove();
       if (callback) callback();
-    }, 550);
+    }, 900);
   }
 
   function handleMatch(result) {
